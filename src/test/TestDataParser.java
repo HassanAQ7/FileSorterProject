@@ -43,12 +43,18 @@ public class TestDataParser {
             assertEquals("1", record1.getColumnValues().get("Variable1"));
             assertEquals("Call", record1.getColumnValues().get("Variable2"));
 
+            assertTrue(record1.getHeaders().contains("Variable1"));
+            assertTrue(record1.getHeaders().contains("Variable2"));
+
             DataRecord record2 = records.get(1);
             assertEquals(2, record2.getColumnValues().size());
             assertTrue(record2.getColumnValues().containsKey("Variable1") &&
                     record2.getColumnValues().containsKey("Variable2"));
             assertEquals("5", record2.getColumnValues().get("Variable1"));
             assertEquals("Aloha", record2.getColumnValues().get("Variable2"));
+
+            assertTrue(record2.getHeaders().contains("Variable1"));
+            assertTrue(record2.getHeaders().contains("Variable2"));
 
         } catch (IOException e) {
             fail("Exception shouldn't have been thrown, file exists");
