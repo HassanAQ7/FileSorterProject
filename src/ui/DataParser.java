@@ -12,6 +12,10 @@ public class DataParser {
 
     }
 
+    public String getPath() {
+        return "";
+    }
+
     // EFFECTS: Parses DataRecords and fields from CSV File and returns it
     public List<DataRecord> parseRecords() {
         return null;
