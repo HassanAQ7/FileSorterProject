@@ -4,6 +4,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.opencsv.exceptions.CsvException;
+
+import exceptions.FileSkipException;
+
 import com.opencsv.*;
 
 import model.DataRecord;
@@ -19,10 +22,10 @@ import java.util.List;
 public class TestDataParser {
 
     @Test
-    public void testNoCSVFile() {
-        DataParser csvFile = new DataParser("resources/nonexistent.csv");
+    public void testNoCSVFileNoSkip() {
+        DataParser csvFile = new DataParser("resources/nonexistent.csv", false);
         try {
-            csvFile.parseRecords();
+            csvFile.parseRecords(0);
         } catch (IOException e) {
             // pass
         } catch (CsvException e) {
@@ -31,10 +34,10 @@ public class TestDataParser {
     }
 
     @Test
-    public void testExistentCSVFile() {
-        DataParser csvFile = new DataParser("./resources/testFile.csv");
+    public void testExistentCSVFileNoSkip() {
+        DataParser csvFile = new DataParser("./resources/testFile.csv", false);
         try {
-            List<DataRecord> records = csvFile.parseRecords();
+            List<DataRecord> records = csvFile.parseRecords(0);
             assertEquals(2, records.size());
             DataRecord record1 = records.get(0);
             assertEquals(2, record1.getColumnValues().size());
@@ -60,6 +63,46 @@ public class TestDataParser {
             fail("Exception shouldn't have been thrown, file exists");
         } catch (CsvException e) {
             fail("No need for exception to be thrown");
+        }
+    }
+
+    @Test
+    public void testFileSkipRowsException() {
+        DataParser csvFile = new DataParser("resources/testFile.csv", true);
+        try {
+            csvFile.parseRecords(0);
+        } catch (IOException e) {
+            fail("Exception shouldn't have been thrown, file exists");
+        } catch (CsvException e) {
+            fail("No need for exception to be thrown");
+        } catch (FileSkipException e) {
+            // pass
+        }
+    }
+
+    @Test
+    public void testSkipExistingFileRows() {
+        DataParser csvFile = new DataParser("resources/testFile.csv", true);
+        try {
+            List<DataRecord> records = csvFile.parseRecords(1);
+            assertEquals(1, records.size());
+
+            DataRecord record1 = records.get(0);
+            assertEquals(2, record1.getColumnValues().size());
+            assertTrue(record1.getColumnValues().containsKey("1") &&
+                    record1.getColumnValues().containsKey("Call"));
+
+            assertEquals("5", record1.getColumnValues().get("1"));
+            assertEquals("Aloha", record1.getColumnValues().get("Call"));
+
+            assertTrue(record1.getHeaders().contains("1"));
+            assertTrue(record1.getHeaders().contains("Call"));
+        } catch (IOException e) {
+            fail("Exception shouldn't have been thrown, file exists");
+        } catch (CsvException e) {
+            fail("No need for exception to be thrown");
+        } catch (FileSkipException e) {
+            fail("Skipping was specified with number of lines");
         }
     }
 
