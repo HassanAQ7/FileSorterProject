@@ -46,7 +46,7 @@ public class DataParser {
         String[] recordValues;
 
         while ((recordValues = recordReader.readNext()) != null) {
-            Map<String, String> columnValues = new LinkedHashMap<>();
+            LinkedHashMap<String, String> columnValues = new LinkedHashMap<>();
             for (int i = 0; i < headers.length; i++) {
                 columnValues.put(headers[i], recordValues[i]);
             }
