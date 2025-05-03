@@ -29,7 +29,9 @@ public class TestDataParser {
         } catch (IOException e) {
             // pass
         } catch (CsvException e) {
-            fail();
+            fail("No error in CSV file handling");
+        } catch (FileSkipException e) {
+            fail("No skipping or lines specified");
         }
     }
 
@@ -63,6 +65,8 @@ public class TestDataParser {
             fail("Exception shouldn't have been thrown, file exists");
         } catch (CsvException e) {
             fail("No need for exception to be thrown");
+        } catch (FileSkipException e) {
+            fail("No skip and no lines specified");
         }
     }
 
