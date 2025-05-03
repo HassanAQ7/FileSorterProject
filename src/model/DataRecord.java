@@ -1,5 +1,6 @@
 package model;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -7,25 +8,14 @@ import exceptions.ValueNotFoundException;
 
 // Represents a singular row of the specific CSV dataset loaded in
 public class DataRecord {
-    private Map<String, String> columnValues;
+    private LinkedHashMap<String, String> columnValues;
 
     // EFFECTS: constructs a DataRecord with given column values
-    public DataRecord(Map<String, String> columnValues) {
+    public DataRecord(LinkedHashMap<String, String> columnValues) {
         this.columnValues = columnValues;
     }
 
-    // EFFECTS: Returns a value from a specific header name from the dataset
-    // Throws exception if no such value exists.
-    public String getValue(String header) throws ValueNotFoundException {
-        String value = columnValues.get(header);
-        if (value != null) {
-            return value;
-        }
-
-        throw new ValueNotFoundException("Cannot find value");
-    }
-
-    public Map<String, String> getColumnValues() {
+    public LinkedHashMap<String, String> getColumnValues() {
         return columnValues;
     }
 
