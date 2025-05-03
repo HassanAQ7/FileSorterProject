@@ -72,9 +72,9 @@ public class TestDataParser {
 
     @Test
     public void testFileSkipRowsException() {
-        DataParser csvFile = new DataParser("resources/testFile.csv", true);
+        DataParser csvFile = new DataParser("resources/testFile.csv", false);
         try {
-            csvFile.parseRecords(0);
+            csvFile.parseRecords(1);
         } catch (IOException e) {
             fail("Exception shouldn't have been thrown, file exists");
         } catch (CsvException e) {
