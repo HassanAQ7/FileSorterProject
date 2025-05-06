@@ -78,7 +78,7 @@ public class TestRecordComparator {
             assertEquals(1, greaterThan);
         } catch (NumberFormatException e) {
             fail("Exception shouldn't have been thrown, string is numeric");
-        } catch (ParseException e) {
+        } catch (IllegalArgumentException e) {
             fail("A date is not being parsed");
         }
 
@@ -87,7 +87,7 @@ public class TestRecordComparator {
             assertEquals(-1, lessThan);
         } catch (NumberFormatException e) {
             fail("Exception shouldn't have been thrown, string is numeric");
-        } catch (ParseException e) {
+        } catch (IllegalArgumentException e) {
             fail("A date is not being parsed");
         }
 
@@ -96,7 +96,7 @@ public class TestRecordComparator {
             assertEquals(0, sameAs);
         } catch (NumberFormatException e) {
             fail("Exception shouldn't have been thrown, string is numeric");
-        } catch (ParseException e) {
+        } catch (IllegalArgumentException e) {
             fail("A date is not being parsed");
         }
 
@@ -110,21 +110,21 @@ public class TestRecordComparator {
         try {
             int greaterThan = comparator.compare(r2, r1);
             assertEquals(1, greaterThan);
-        } catch (NumberFormatException | ParseException e) {
+        } catch (IllegalArgumentException e) {
             fail("Strings are being compared, shouldn't throw exceptions");
         }
 
         try {
             int lessThan = comparator.compare(r1, r2);
             assertEquals(-1, lessThan);
-        } catch (NumberFormatException | ParseException e) {
+        } catch (IllegalArgumentException e) {
             fail("Strings are being compared, shouldn't throw exceptions");
         }
 
         try {
             int sameAs = comparator.compare(r3, r4);
             assertEquals(0, sameAs);
-        } catch (NumberFormatException | ParseException e) {
+        } catch (IllegalArgumentException e) {
             fail("Strings are being compared, shouldn't throw exceptions");
         }
 
@@ -138,28 +138,28 @@ public class TestRecordComparator {
         try {
             int greaterThan = comparator.compare(r2, r1);
             assertEquals(1, greaterThan);
-        } catch (ParseException e) {
-            fail("Date format is correct");
         } catch (NumberFormatException e) {
             fail("String represents a date type");
+        } catch (IllegalArgumentException e) {
+            fail("Date format is correct");
         }
 
         try {
             int lessThan = comparator.compare(r1, r2);
             assertEquals(-1, lessThan);
-        } catch (ParseException e) {
-            fail("Date format is correct");
         } catch (NumberFormatException e) {
             fail("String represents a date type");
+        } catch (IllegalArgumentException e) {
+            fail("Date format is correct");
         }
 
         try {
             int sameAs = comparator.compare(r3, r4);
             assertEquals(0, sameAs);
-        } catch (ParseException e) {
-            fail("Date format is correct");
         } catch (NumberFormatException e) {
             fail("String represents a date type");
+        } catch (IllegalArgumentException e) {
+            fail("Date format is correct");
         }
 
     }
@@ -173,7 +173,7 @@ public class TestRecordComparator {
             comparator.compare(r2, r1);
         } catch (NumberFormatException e) {
             // pass
-        } catch (ParseException e) {
+        } catch (IllegalArgumentException e) {
             fail("Date not being parsed");
         }
     }
@@ -187,10 +187,10 @@ public class TestRecordComparator {
 
         try {
             comparator.compare(r3, r4);
-        } catch (ParseException e) {
-            // pass
         } catch (NumberFormatException e) {
             fail("Numeric type not being parsed");
+        } catch (IllegalArgumentException e) {
+            // pass
         }
     }
 
