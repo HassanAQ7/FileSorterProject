@@ -108,15 +108,15 @@ public class TestRecordComparator {
         comparator.setCompareType(CompareType.ALPHABETICAL);
 
         try {
-            int greaterThan = comparator.compare(r2, r1);
-            assertEquals(1, greaterThan);
+            int greaterThan = comparator.compare(r1, r2);
+            assertEquals(6, greaterThan);
         } catch (IllegalArgumentException e) {
             fail("Strings are being compared, shouldn't throw exceptions");
         }
 
         try {
-            int lessThan = comparator.compare(r1, r2);
-            assertEquals(-1, lessThan);
+            int lessThan = comparator.compare(r2, r1);
+            assertEquals(-6, lessThan);
         } catch (IllegalArgumentException e) {
             fail("Strings are being compared, shouldn't throw exceptions");
         }
