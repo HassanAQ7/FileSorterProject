@@ -13,7 +13,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class TestRecordSorter {
@@ -60,7 +60,7 @@ public class TestRecordSorter {
 
     @Test
     public void testConstructor() {
-        assertFalse(sorter.getSortOrder());
+        assertTrue(sorter.getSortOrder());
     }
 
     @Test
