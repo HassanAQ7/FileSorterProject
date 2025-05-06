@@ -6,7 +6,6 @@ import com.opencsv.exceptions.CsvException;
 
 import exceptions.FileSkipException;
 
-
 import model.DataRecord;
 import ui.DataParser;
 
@@ -24,6 +23,7 @@ public class TestDataParser {
         DataParser csvFile = new DataParser("resources/nonexistent.csv", false);
         try {
             csvFile.parseRecords(0);
+            fail("IOException should be thrown");
         } catch (IOException e) {
             // pass
         } catch (CsvException e) {
@@ -73,6 +73,7 @@ public class TestDataParser {
         DataParser csvFile = new DataParser("resources/testFile.csv", false);
         try {
             csvFile.parseRecords(1);
+            fail("FileSkipException should be thrown");
         } catch (IOException e) {
             fail("Exception shouldn't have been thrown, file exists");
         } catch (CsvException e) {
