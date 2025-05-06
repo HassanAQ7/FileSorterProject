@@ -6,9 +6,9 @@ import java.util.List;
 // of some specified column and algorithm
 public class RecordSorter {
 
-    // EFFECTS: Constructs a new RecordSorter with provided
-    // list of records to sort
-    public RecordSorter(List<DataRecord> records) {
+    // EFFECTS: Constructs a new RecordSorter with provided list of records to sort, 
+    // and whether it should be sorted in ascending order or not
+    public RecordSorter(List<DataRecord> records, boolean ascending) {
 
     }
 
@@ -18,6 +18,7 @@ public class RecordSorter {
 
     // MODIFIES: this
     // EFFECTS: Sorts the provided list of records based on a category and ComparisonType
+    // if ascending is true, sorts in ascending order, if false it does so in the reverse order
     public void sortRecords(String category, RecordComparator.CompareType type) {
     
     }
