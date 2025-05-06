@@ -1,15 +1,13 @@
 package model;
 
 import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Set;
 
-import exceptions.ValueNotFoundException;
 
 // Represents a singular row of the specific CSV dataset loaded in
 public class DataRecord {
     private LinkedHashMap<String, String> columnValues;
-
+   
     // EFFECTS: constructs a DataRecord with given column values
     public DataRecord(LinkedHashMap<String, String> columnValues) {
         this.columnValues = columnValues;
