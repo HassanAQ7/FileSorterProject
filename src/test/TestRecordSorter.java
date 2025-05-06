@@ -91,8 +91,8 @@ public class TestRecordSorter {
 
         assertEquals(4, sorter.getRecords().size());
 
-        assertEquals(r4, sorter.getRecords().get(0));
-        assertEquals(r3, sorter.getRecords().get(1));
+        assertEquals(r3, sorter.getRecords().get(0));
+        assertEquals(r4, sorter.getRecords().get(1));
         assertEquals(r2, sorter.getRecords().get(2));
         assertEquals(r1, sorter.getRecords().get(3));
 
@@ -108,10 +108,10 @@ public class TestRecordSorter {
 
         assertEquals(4, sorter.getRecords().size());
 
-        assertEquals(r1, sorter.getRecords().get(0));
+        assertEquals(r2, sorter.getRecords().get(0));
         assertEquals(r3, sorter.getRecords().get(1));
         assertEquals(r4, sorter.getRecords().get(2));
-        assertEquals(r2, sorter.getRecords().get(3));
+        assertEquals(r1, sorter.getRecords().get(3));
     }
 
     @Test
@@ -125,10 +125,10 @@ public class TestRecordSorter {
 
         assertEquals(4, sorter.getRecords().size());
 
-        assertEquals(r2, sorter.getRecords().get(0));
-        assertEquals(r4, sorter.getRecords().get(1));
-        assertEquals(r3, sorter.getRecords().get(2));
-        assertEquals(r1, sorter.getRecords().get(3));
+        assertEquals(r1, sorter.getRecords().get(0));
+        assertEquals(r3, sorter.getRecords().get(1));
+        assertEquals(r4, sorter.getRecords().get(2));
+        assertEquals(r2, sorter.getRecords().get(3));
     }
 
     @Test
@@ -159,8 +159,8 @@ public class TestRecordSorter {
         assertEquals(4, sorter.getRecords().size());
 
         assertEquals(r1, sorter.getRecords().get(0));
-        assertEquals(r4, sorter.getRecords().get(1));
-        assertEquals(r3, sorter.getRecords().get(2));
+        assertEquals(r3, sorter.getRecords().get(1));
+        assertEquals(r4, sorter.getRecords().get(2));
         assertEquals(r2, sorter.getRecords().get(3));
     }
 
@@ -177,8 +177,12 @@ public class TestRecordSorter {
 
     @Test
     public void testParseDateIssue() {
+        r1.getColumnValues().put("WrongDate", "08-09-1999-07-02-UTC");
+        r2.getColumnValues().put("WrongDate", "08-09-2010-07-02-UTC");
+        r3.getColumnValues().put("WrongDate", "08-09-1899-07-02-UTC");
+        r4.getColumnValues().put("WrongDate", "08-09-2999-07-02-UTC");
         try {
-            sorter.sortRecords("Variable3", CompareType.ALPHABETICAL);
+            sorter.sortRecords("WrongDate", CompareType.DATE);
             fail("Exception should be thrown");
         } catch (IllegalArgumentException e) {
             // pass
