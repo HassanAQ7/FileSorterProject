@@ -6,9 +6,7 @@ import org.junit.jupiter.api.Test;
 import model.DataRecord;
 import model.RecordComparator;
 import model.RecordComparator.CompareType;
-import ui.DataParser;
 
-import java.text.ParseException;
 import java.util.LinkedHashMap;
 
 import static org.junit.Assert.assertEquals;
