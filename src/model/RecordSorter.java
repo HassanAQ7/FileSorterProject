@@ -16,16 +16,20 @@ public class RecordSorter {
         return null; // stub
     }
 
+    public boolean getSortOrder() {
+        return false; // stub
+    }
+
+    public void setSortOrder(boolean ascending) {
+
+    }
+
     // MODIFIES: this
     // EFFECTS: Sorts the provided list of records based on a category and
     // ComparisonType
     // if ascending is true, sorts in ascending order, if false it does so in the
     // reverse order
     public void sortRecords(String category, RecordComparator.CompareType type) {
-
-    }
-
-    public void setSortOrder(boolean ascending) {
 
     }
 
